@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Competitor Analysis | The Gutter Doctor</title><style>
+:root{--bg:#0d1117;--panel:#161b22;--ink:#e6edf3;--mut:#9aa7b4;--line:#2a3340;--accent:#2f81f7;
+  --good:#3fb950;--bad:#f85149;--gradF:#f85149;--gradD:#e8702a;--gradC:#d29922;--gradB:#3fb950;--gradA:#2ea043;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--mut);font-weight:600}
+header{padding:46px 0 28px;border-bottom:1px solid var(--line);background:radial-gradient(1200px 400px at 70% -10%,rgba(47,129,247,.18),transparent)}
+h1{font-size:30px;font-weight:800;margin:10px 0 6px;letter-spacing:-.01em}
+.sub{color:var(--mut);font-size:15px}
+.hero{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:center;margin:34px 0 8px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.gradecard{border:1px solid var(--line);border-radius:18px;padding:26px;text-align:center;position:relative;overflow:hidden}
+.gc-F{background:linear-gradient(160deg,#2a1410,#1c2330)}.gc-D{background:linear-gradient(160deg,#2a1c10,#1c2330)}
+.gc-C{background:linear-gradient(160deg,#2a2410,#1c2330)}.gc-B{background:linear-gradient(160deg,#102a1a,#1c2330)}
+.bigletter{font-size:96px;font-weight:900;line-height:1;position:relative}
+.bl-F{color:var(--gradF);text-shadow:0 0 40px rgba(248,81,73,.45)}
+.bl-D{color:var(--gradD);text-shadow:0 0 40px rgba(232,112,42,.45)}
+.bl-C{color:var(--gradC);text-shadow:0 0 40px rgba(210,153,34,.45)}
+.score100{font-size:18px;color:var(--mut);margin-top:6px;position:relative}
+.heroread h2{font-size:21px;font-weight:800;margin-bottom:10px}
+.heroread p{color:var(--mut);font-size:15.5px}
+.heroread .tag{display:inline-block;margin-top:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink);background:var(--panel)}
+section{padding:34px 0;border-bottom:1px solid var(--line)}
+.h{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.rname{font-weight:600;font-size:15px}
+.bar{height:7px;background:#0b0f15;border-radius:99px;margin-top:9px;overflow:hidden}
+.fill{height:100%;border-radius:99px}
+.badge{font-weight:800;font-size:15px;min-width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0d1117}
+.gF{background:var(--gradF)}.gD{background:var(--gradD)}.gC{background:var(--gradC)}.gB{background:var(--gradB);color:#06210f}.gA{background:var(--gradA);color:#06210f}
+.sc{font-size:12px;color:var(--mut);margin-top:3px}
+.flag{background:linear-gradient(160deg,#2a1410,#161b22);border:1px solid #6f2a1f;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.flag .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--bad);font-weight:700;margin-bottom:8px}
+.win{background:linear-gradient(160deg,#0f2417,#161b22);border:1px solid #1f6f3a;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.win .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--good);font-weight:700;margin-bottom:8px}
+.warn{background:linear-gradient(160deg,#2a2410,#161b22);border:1px solid #6f5a1f;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.warn .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--gradC);font-weight:700;margin-bottom:8px}
+.flag p,.win p,.warn p{color:var(--mut);font-size:14.5px;margin-bottom:9px}
+.flag p:last-child,.win p:last-child,.warn p:last-child{margin-bottom:0}
+.flag b,.win b,.warn b{color:var(--ink)}
+.flag ul,.win ul,.warn ul{margin:0 0 9px 20px;color:var(--mut);font-size:14.5px}
+.flag li,.win li,.warn li{margin-bottom:6px}
+.code{background:#0b0f15;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;line-height:1.85;color:var(--mut);overflow-x:auto}
+.code .ph{color:#ff9d94;font-weight:700}.code .ok{color:#84e0a8;font-weight:700}.code .c{color:#5b6672}
+.cmp{width:100%;border-collapse:collapse;font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cmp th{text-align:left;padding:11px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line);font-weight:700}
+.cmp td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--mut);vertical-align:top}
+.cmp tr:last-child td{border-bottom:none}.cmp td b{color:var(--ink)}.cmp tr.you td{background:#241a12}
+.cmp .yes{color:var(--good);font-weight:700}.cmp .no{color:var(--bad);font-weight:700}
+.opp{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.opp{grid-template-columns:1fr}}
+.ocard{background:linear-gradient(160deg,#0f2417,#161b22);border:1px solid #1f6f3a;border-radius:14px;padding:20px;text-align:center}
+.ocard .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)}
+.ocard .big{font-size:30px;font-weight:900;color:var(--good);margin:8px 0 2px}
+.ocard .small{font-size:13px;color:var(--mut)}
+.oppnote{color:var(--mut);font-size:14px;margin-top:14px}.oppnote b{color:var(--ink)}
+.arrow{display:flex;align-items:center;justify-content:center;gap:18px;margin:6px 0 2px;flex-wrap:wrap}
+.pill{font-size:60px;font-weight:900;line-height:1}
+.pill.from-F{color:var(--gradF)}.pill.from-D{color:var(--gradD)}.pill.from-C{color:var(--gradC)}
+.pill.to{color:var(--gradA)}
+.pilllab{font-size:12px;color:var(--mut);text-align:center;text-transform:uppercase;letter-spacing:.1em}
+.ar{font-size:34px;color:var(--mut)}
+ul.road{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){ul.road{grid-template-columns:1fr}}
+ul.road li{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:11px 14px;font-size:14.5px}
+.road2 li{border-left-color:var(--good)}
+.cta{text-align:center;padding:40px 0 56px}
+.cta h2{font-size:22px;font-weight:800;margin-bottom:8px}
+.cta p{color:var(--mut);font-size:15px}
+footer{color:var(--mut);font-size:12.5px;text-align:center;padding:22px 0 40px;line-height:1.7}
+.gscale{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 26px 20px;margin-top:16px}
+.gscale .gtitle{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);font-weight:700;margin-bottom:26px;text-align:center}
+.gtrack{position:relative;height:14px;border-radius:8px;background:linear-gradient(90deg,#f85149 0%,#f85149 18%,#e3833c 34%,#d4a72c 52%,#7ec46a 74%,#3fb950 100%);margin:0 4px}
+.gmark{position:absolute;top:-46px;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.gmark .gm-lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);font-weight:700}
+.gmark .gm-val{font-size:19px;font-weight:900;line-height:1.15}
+.gmark:after{content:"";position:absolute;left:50%;top:100%;width:2px;height:22px;transform:translateX(-50%);background:currentColor;opacity:.75}
+.gmark.now{color:var(--bad)}.gmark.now .gm-val{color:var(--bad)}
+.gmark.proj{color:var(--good)}.gmark.proj .gm-val{color:var(--good)}
+.gmark.proj{top:auto;bottom:-52px}
+.gmark.proj:after{top:auto;bottom:100%}
+.gdot{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;transform:translate(-50%,-50%);border:3px solid #0d1117}
+.gdot.now{background:var(--bad)}.gdot.proj{background:var(--good)}
+.gticks{display:flex;justify-content:space-between;margin:66px 4px 0;font-size:11px;letter-spacing:.08em;color:var(--mut);font-weight:700}
+@media(max-width:620px){.gmark .gm-lab{font-size:9px}.gmark .gm-val{font-size:16px}}
+
+.agnav{position:sticky;top:0;z-index:60;background:rgba(13,17,23,.93);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+.agnav .inner{max-width:1080px;margin:0 auto;padding:0 22px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.agnav .inner::-webkit-scrollbar{display:none}
+.agnav a{flex:0 0 auto;padding:13px 12px;font-size:13.5px;font-weight:600;color:var(--mut);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
+.agnav a:hover{color:var(--ink)}
+.agnav a.on{color:var(--accent);border-bottom-color:var(--accent)}
+.agnav a.ext{opacity:.8}
+@media(max-width:640px){.agnav .inner{padding:0 14px}.agnav a{padding:12px 10px;font-size:13px}}
+</style></head><body><nav class="agnav"><div class="inner"><a href="assets.html">All Assets</a><a href="./">Audit</a><a href="competitors.html" class="on">Competitors</a></div></nav>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Competitor Analysis &middot; Guttering, Fascias &amp; Roofline &middot; Somerset</div>
+    <div class="sub">Prepared for Daniel Perry &middot; The Gutter Doctor &middot; 22 September 2026 &middot; AG1 Consulting</div>
+    <h1>Not One Firm In Somerset Is Running A Pixel Or An Advert. The Whole Market Is Asleep.</h1>
+
+    <div class="hero">
+      <div class="gradecard gc-A">
+        <div class="bigletter bl-A" style="font-size:46px">0 / 4</div>
+        <div class="score100">local rivals running any advertising or retargeting</div>
+      </div>
+      <div class="heroread">
+        <h2>You are already winning this market. The relevant question is not who is beating you &mdash; it is how long the door stays open.</h2>
+        <p>We checked every guttering and roofline firm we could reach around Taunton and Bridgwater. <b>None has a Meta
+        pixel. None is advertising. Only one has a tag manager.</b> The Meta ads trading under "Gutter Doctor" belong to
+        unrelated firms in Falkirk and Sudbury, not to you.</p>
+        <div class="tag">Sites, sitemaps and the Meta Ad Library read 22 September 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="h">The Comparison</div>
+    <div style="overflow-x:auto">
+    <table class="cmp">
+      <tr>
+        <th></th>
+        <th>Pepper Roofing (Bridgwater)</th>
+        <th>Masters Roofing (Taunton)</th>
+        <th>Byron's Cleaning (Taunton)</th>
+        <th class="you">The Gutter Doctor</th>
+      </tr>
+      <tr><td><b>Pages published</b></td><td class="yes">17</td><td>14</td><td class="no">3</td><td><b>9</b></td></tr>
+      <tr><td><b>Analytics / Tag Manager</b></td><td class="yes">Tag Manager</td><td class="no">None found</td><td class="no">None found</td><td class="yes"><b>GA4</b></td></tr>
+      <tr><td><b>Meta pixel</b></td><td class="no">None found</td><td class="no">None found</td><td class="no">None found</td><td class="no"><b>None</b></td></tr>
+      <tr><td><b>Meta ads running</b></td><td class="no">None found</td><td class="no">None found</td><td class="no">None found</td><td class="no"><b>None</b></td></tr>
+      <tr><td><b>Forms on homepage</b></td><td class="no">0</td><td class="no">0</td><td class="yes">2</td><td class="no"><b>0 &mdash; contact page only</b></td></tr>
+      <tr><td><b>Landline published</b></td><td class="no">Mobile only</td><td class="no">Mobile only</td><td class="yes">01823</td><td class="yes"><b>01823 + mobile</b></td></tr>
+      <tr><td><b>Business schema</b></td><td class="yes">LocalBusiness + Offer + GeoCoordinates</td><td class="no">WebSite only</td><td class="no">WebSite only</td><td><b>LocalBusiness + address</b></td></tr>
+      <tr><td><b>Review markup / reviews shown</b></td><td class="yes">AggregateRating, 7 reviews</td><td class="no">None found</td><td class="no">None found</td><td class="no"><b>None</b></td></tr>
+      <tr><td><b>Town pages</b></td><td>Names Taunton</td><td>Names Taunton</td><td class="no">None found</td><td class="no"><b>None</b></td></tr>
+    </table>
+    </div>
+    <div class="tag" style="margin-top:12px">Read from each firm's own served pages and published sitemaps on 22 September 2026, and from Meta's public Ad Library. "None found" records what our check returned and is not proof of absence; several of these sites render with JavaScript, which a static read cannot see. PW Maintenance &amp; Roofing did not resolve and GBC Maintenance returned an access block &mdash; <b>neither has been assessed in any respect.</b></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">The One Worth Watching</div>
+    <div class="flag">
+      <div class="lab">Pepper Roofing, Bridgwater &mdash; smaller than you, and doing three things you are not</div>
+      <ul>
+        <li><b>Seventeen pages to your nine</b>, and they name Taunton on them. They are advertising into your town.</li>
+        <li><b>AggregateRating markup with seven reviews on the page</b>, so their stars are eligible to appear in
+        search results. Yours are not, on a business many times their size.</li>
+        <li><b>Google Tag Manager</b>, which means somebody is at least able to add and manage tracking properly.</li>
+      </ul>
+      <p><b>They are not beating you and they are not close.</b> But they are the only firm here behaving like they
+      intend to grow, and everything they have done is cheap and copyable &mdash; which cuts both ways.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">Where You Are Already Ahead</div>
+    <div class="win">
+      <div class="lab">Four things that are true of you and of almost nobody else here</div>
+      <ul>
+        <li><b>You publish a landline.</b> Two of the three rivals give a mobile only. For commercial and letting-agent
+        work, a 01823 number reads as a business rather than a man with a van &mdash; and that is where the larger jobs
+        live.</li>
+        <li><b>You have analytics and they mostly do not.</b> Only Pepper has anything comparable.</li>
+        <li><b>Your titles and schema are properly done.</b> Two competitors publish nothing but a WebSite tag.</li>
+        <li><b>Nine service pages, each with real copy</b> &mdash; bargeboards, cladding, painting, fascias and soffits.
+        Byron's has three pages in total.</li>
+      </ul>
+    </div>
+    <div class="warn">
+      <div class="lab">And the honest read on what that means</div>
+      <p>You are booked nine weeks out at 50% margins in a market where <b>nobody is advertising, nobody is
+      retargeting, and one competitor has review markup.</b> That is not a coincidence &mdash; you are winning a race
+      almost nobody has entered.</p>
+      <p><b>The risk is not Pepper Roofing. It is a national roofline firm or a franchise deciding Somerset is worth
+      buying</b>, walking into an auction with no incumbent bidder and taking the top of the market in a season. Right
+      now you would have no pixel, no ad account history and no attribution to defend with.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">What We Could Not Check</div>
+    <div class="warn">
+      <div class="lab">Marked honestly rather than guessed</div>
+      <ul>
+        <li><b>Two local firms were unreachable</b> &mdash; PW Maintenance &amp; Roofing did not resolve, GBC
+        Maintenance returned an access block. Neither appears in the table.</li>
+        <li><b>Everyone's Google Business Profile, review counts and map pack position</b>, including yours. That is
+        where a lot of local work is actually won and we have no reliable way to measure it.</li>
+        <li><b>Anyone's revenue, job values, pricing, margins or lead volume</b>, including yours &mdash; your figures
+        are as you reported them.</li>
+        <li><b>Whether any of these firms advertise on Google</b>, which is a separate auction we have not assessed.</li>
+        <li><b>Checkatrade, Which? Trusted Trader and similar directories</b>, which may be where your rivals are
+        actually spending.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <div class="wrap">
+    <h2>An empty auction is an opportunity right up until somebody else notices it.</h2>
+    <p>You have the margin and the reputation to take this market properly. Nobody local is in a position to stop you.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Prepared by Andrei Givero &middot; AG1 Consulting &middot; 22 September 2026<br><br>
+    For Daniel Perry, The Gutter Doctor, Somerset. <b>Page counts, analytics and tag containers, Meta pixels, forms,
+    published telephone numbers, structured data types and on-page review counts were read from each named company's own
+    served pages and published sitemaps on 22 September 2026.</b> Meta advertising was checked in Meta's public Ad Library
+    by exact phrase on the same date; <b>the ads returned for the phrase "Gutter Doctor" are attributable to unrelated
+    businesses in Falkirk and Sudbury and have been excluded entirely.</b> Cells marked "none found" record what our check
+    returned on that date and must not be read as proof of absence; content or tracking rendered by JavaScript after
+    loading may not appear in a static read, and a sitemap count can understate a site's true size. <b>PW Maintenance
+    &amp; Roofing Services and GBC Maintenance could not be reached and have not been assessed in any respect.</b> <b>No
+    company's revenue, margins, job values, pricing, lead volume, staffing, licensing, insurance or workmanship has been
+    assessed, and nothing whatsoever is claimed or implied about any of them.</b> <b>No Google Business Profile, map pack
+    position or review count has been measured for any firm, including The Gutter Doctor.</b> The observation about
+    national or franchise entrants is a general commercial judgement, not a prediction about any identified company.
+    <b>No ranking, enquiry volume, market share or revenue outcome is forecast or promised anywhere in this document.</b>
+    Nothing here is a comment on the competence, conduct or standing of any named business; company names are used for
+    identification only and belong to their respective owners. The commentary and any judgements are AG1's own editorial
+    opinion.
+  </div>
+</footer>
+</body></html>
